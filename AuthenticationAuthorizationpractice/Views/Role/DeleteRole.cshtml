@@ -1,0 +1,35 @@
+﻿@model AuthenticationAuthorizationpractice.Models.RoleViewModel;
+
+@{
+    ViewBag.Title = "Delete Role";
+}
+<div class="Text-center">
+<h4>Delete Role</h4>
+<hr />
+<form method="post" class="mt-3">
+    <div class="form-group row">
+        <label asp-for="Id" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="Id" disabled class="form-control">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label asp-for="RoleName" class="col-sm-2 col-form-label"></label>
+        <div class="col-sm-10">
+            <input asp-for="RoleName" disabled class="form-control">
+          
+        </div>
+    </div>
+
+   
+
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a asp-action="ListRoles" class="btn btn-primary">Cancel</a>
+        </div>
+    </div>
+
+
+</form>
+</div>

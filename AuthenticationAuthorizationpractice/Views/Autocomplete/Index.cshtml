@@ -1,0 +1,68 @@
+﻿@{
+
+    Layout = null;
+
+}
+
+
+<link href="~/css/jquery-ui.css" rel="stylesheet" />
+@using (Html.BeginForm("Index", "Autocomplete", FormMethod.Post))
+{
+    <input type="text" id="textPerson" name="personName" />
+
+    <br />
+    <input type="submit" id="btnSubmit" value="Submit" />
+    <br />
+    <br />
+    @ViewBag.Message
+}
+@section scripts{
+
+
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="~/js/jquery-ui.min.js"></script>
+
+    
+    
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#textPerson").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: '/Autocomplete/GetRecord',
+                        data: { "prefix": request.term },
+                        type: "POST",
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return item;
+                            }))
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                },
+                select: function (e, i) {
+                    //get selected value
+                    //$("#personNameValue").val(i.item.val);
+                },
+                minLength: 1
+            });
+        });
+    </script>
+}
+
+
+
+
+
+
+
+
+
+

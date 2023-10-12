@@ -1,0 +1,88 @@
+﻿@model IEnumerable<IdentityRole>
+
+@{
+    ViewBag.Title = "All Roles";
+}
+
+@if (User.Identity.IsAuthenticated)
+ {
+
+    <div class="text-center">
+        <h4>Role List</h4>
+       <hr/>
+    </div>
+
+    <div class="row">
+        
+        <div class="col-md-2">
+            <a class="btn btn-primary mb-3" style="width:auto" asp-action="CreateRole"
+   asp-controller="Role">+Add Role</a>
+      
+        </div>
+        <div class="col-md-10"></div>
+        <hr/>
+    </div>
+
+@if (Model.Any())
+{
+    
+     <div class="col-md-10">
+   
+<table class="table">
+
+    <tr>
+         <th style="display:none">Role Id</th>
+        <th> Role Name</th>
+          <th> Action</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        
+        <tr>
+          
+            <td style="display:none;">@item.Id</td>
+            <td>@item.Name</td>  
+            
+            
+            <td>
+                  
+                    <input type="button" class="btn btn-primary" value="Eidt" onclick="@("window.location.href='" + @Url.Action("EditRole", "Role") +"/"+@item.Id+"'");" />
+                    <input type="button" style="font-size:smaller" class="btn btn-danger" value="Delete" onclick="@("window.location.href='" + @Url.Action("DeleteRole", "Role") +"/"+@item.Id+"'");" />
+                    <input type="button" style="font-size:smaller" class="btn btn-info" value="Details" onclick="@("window.location.href='" + @Url.Action("DetailsRole", "Role") +"/"+@item.Id+"'");" />
+                     <a asp-action="ManageRoleClaims" asp-controller="AdministrationR" asp-route-roleId="@item.Id"
+                             style="width:auto;font-size:smaller" class="btn btn-primary">
+                                Role Claims
+                            </a>
+
+                           
+            </td>
+          
+        </tr>
+        
+    }
+   
+
+  </table>
+    </div>
+
+     
+
+} else
+    {
+        <div class="card">
+            <div class="card-header">
+                No roles created yet
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">
+                    Use the button below to create a role
+                </h5>
+                <a class="btn btn-primary" style="width:auto"
+               asp-controller="Role" asp-action="CreateRole">
+                    Create Role
+                </a>
+            </div>
+        </div>
+    }
+ }

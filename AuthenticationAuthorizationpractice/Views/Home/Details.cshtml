@@ -1,0 +1,210 @@
+﻿@model AuthenticationAuthorizationpractice.Models.EmployeeDTO;
+
+@if (User.Identity.IsAuthenticated)
+{
+
+    <div class="text-center">
+        <h4>Employee Details</h4>
+        <hr />
+    </div>
+
+
+
+
+
+    <table class="table">
+
+
+
+        <tr>
+
+
+            <td>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+
+                            <p>Name</p>
+                        </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control",@disabled = "disabled" } })
+                      
+                        </div>
+
+                    </div>
+                </div>
+                <br />
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+
+                            <p>Last Name</p>
+                        </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control",@disabled = "disabled" } })
+                        
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+
+                            <p>Email</p>
+                        </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control",@disabled = "disabled" } })
+                       
+                        </div>
+                    </div>
+
+                </div>
+
+                <br />
+
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+
+                            <p>User ID</p>
+                        </div>
+                        <div class="col-md-10">
+
+                            @Html.EditorFor(model => model.UserNameOrEmail, new { htmlAttributes = new { @class = "form-control",@disabled = "disabled" } })
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <br />
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+
+                            <p>Age</p>
+                        </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Age, new { htmlAttributes = new { @class = "form-control",@disabled = "disabled" } })
+                     
+                        </div>
+                    </div>
+                </div>
+
+
+                <br />
+
+                <div class="form-group">
+                    <div class="row">
+
+                        <div class="col-md-2">
+
+                            <p>Join Date</p>
+                        </div>
+
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Doj, new { htmlAttributes = new { @class = "form-control",@disabled = "disabled" } })
+                    
+                        </div>
+                    </div>
+                </div>
+
+
+                <br />
+
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+
+                            <p>Gender</p>
+                        </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control",@disabled = "disabled" } })
+                            
+                        </div>
+                    </div>
+                </div>
+
+
+                <br />
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+
+                            <p>Married</p>
+                        </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.IsMarried, new { htmlAttributes = new { @class = "form-control",@disabled = "disabled" } })
+                           
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+
+                            <p>Status</p>
+                        </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.IsActive, new { htmlAttributes = new { @class = "form-control",@disabled = "disabled" } })
+                        
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            Designation- :
+                        </div>
+                        <div class="col-md-10">
+                            @Html.DropDownList("DesignationID", (SelectList) ViewBag.DeptList, "-- Select Employee --", new { @class = "form-control",@disabled = "disabled" })
+                        </div>
+                    </div>
+                </div>
+                <br>
+
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+
+                            <p>Role</p>
+                        </div>
+                        <div class="col-md-10">
+                            @Html.DropDownList("RoleID", (SelectList) ViewBag.RoleViewModelList, "-- Select Role --", new { @class = "form-control",@disabled = "disabled" })
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <input type="button" value="BacK to List" onclick="@("window.location.href='" + @Url.Action("Index", "Home") + "'");" />
+
+
+
+                <br>
+
+            </td>
+        </tr>
+
+    </table>
+
+
+
+}

@@ -1,0 +1,85 @@
+﻿@model IEnumerable<AuthenticationAuthorizationpractice.Models.EmployeeDTO>;
+@inject SignInManager<IdentityUser> SignInManager;
+
+<style>
+    .table {
+        font-size: small;
+    }
+
+    .btn {
+        font-size: smaller;
+    }
+</style>
+
+@if (User.Identity.IsAuthenticated)
+{
+
+    <div class="text-center">
+        <h4>Employee List</h4>
+        <hr />
+    </div>
+
+
+    @if (SignInManager.IsSignedIn(User) )
+    {
+        <div class="row">
+            <div class="col-md-10"></div>
+            <div class="col-md-2">
+                <input type="button" class="btn btn-primary" value="+Add Employee" onclick="@("window.location.href='" + @Url.Action("Create", "Home") +"'");" />
+            </div>
+        </div>
+    }
+    <table class="table">
+        <hr />
+        <tr>
+            <th style="display:none;">Id</th>
+            <th>Name</th>
+           
+            <th>Email</th>
+            <th>User ID</th>
+            <th>Age</th>
+            <th style="display:none;>Date of Join</th>
+            <th style="display:none;">Gender</th>
+            <th style="display:none;">Married</th>
+            <th style="display:none;">Status</th>
+            <td style="display:none;">Designation Id</td>
+
+            <th>Designation</th>
+            <th>Role</th>
+            <th>Action</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td style="display:none;">@item.Id</td>
+                <td>@item.Name &nbsp;@item.LastName </td>
+              
+                <td>@item.Email</td>
+                <td>@item.UserNameOrEmail</td>
+                <td>@item.Age</td>
+                <td style="display:none;>@item.Doj.ToString("dd/MM/yyyy")</td>
+                <td style="display:none;">@item.Gender</td>
+                <td style="display:none;">@item.IsMarried</td>
+                <td style="display:none;">@item.IsActive</td>
+                <td style="display:none;">@item.DesignationID</td>
+                <td>@item.Designations</td>
+                <td>@item.RoleName</td>
+                <td>
+
+                    <input type="button" class="btn btn-primary" value="Eidt" onclick="@("window.location.href='" + @Url.Action("Edit", "Home") +"/"+@item.Id+"'");" />
+
+                    <input type="button" class="btn btn-danger" value="Delete" onclick="@("window.location.href='" + @Url.Action("Delete", "Home") +"/"+@item.Id+"'");" />
+                    <input type="button" class="btn btn-info" value="Details" onclick="@("window.location.href='" + @Url.Action("Details", "Home") +"/"+@item.Id+"'");" />
+
+                    <a asp-action="ManageUserClaims" asp-controller="Administration" asp-route-userId="@item.UserID"
+                        style="width:auto;font-size:smaller" class="btn btn-primary">
+                            User Claims 
+                        </a>
+                   
+                </td>
+            </tr>
+        }
+    </table>
+
+
+}
